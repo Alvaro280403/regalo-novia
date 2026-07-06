@@ -17,6 +17,40 @@
             overflow-x: hidden;
         }
 
+        /* Botón de Música Flotante */
+        .boton-musica {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #ff4081;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            font-size: 1.6rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s;
+        }
+
+        .boton-musica:hover {
+            transform: scale(1.1);
+        }
+
+        .reproduciendo {
+            animation: pulso 1.5s infinite alternate;
+        }
+
+        @keyframes pulso {
+            0% { transform: scale(1); box-shadow: 0 4px 10px rgba(255, 64, 129, 0.4); }
+            100% { transform: scale(1.1); box-shadow: 0 4px 20px rgba(255, 64, 129, 0.8); }
+        }
+
         .pizarron {
             background-color: #1e4620;
             border: 15px solid #8b5a2b;
@@ -120,6 +154,14 @@
 </head>
 <body>
 
+    <!-- Botón interactivo para la música -->
+    <button class="boton-musica" id="btnMusica" onclick="controlarMusica()">🎵</button>
+
+    <!-- Tu enlace directo de Google Drive con la canción Iris de Goo Goo Dolls -->
+    <audio id="musicaFondo" loop>
+        <source src="https://google.com" type="audio/mpeg">
+    </audio>
+
      <div class="pizarron">
         <h1>¡Feliz Día de la Maestra, mi amorcito preciosa! 🍎❤️</h1>
         <div class="subtitulo">✨ ¡La profesora de Inicial más hermosa de todas! ✨</div>
@@ -147,10 +189,29 @@
             libro: "🎓 <strong>¡Ya no falta nada, mi reina!</strong> ya casi terminas y tú ya brillando en las aulas. Me hace inmensamente feliz acompañarte en este camino y ver cómo cumples tus sueños. ¡Siempre voy a estar aquí para aplaudir tus logros!"
         };
 
+        const musica = document.getElementById('musicaFondo');
+        const boton = document.getElementById('btnMusica');
+
+        function controlarMusica() {
+            if (musica.paused) {
+                musica.play();
+                boton.classList.add('reproduciendo');
+                boton.innerText = '⏸️';
+            } else {
+                musica.pause();
+                boton.classList.remove('reproduciendo');
+                boton.innerText = '🎵';
+            }
+        }
+
         function mostrarMensaje(tipo) {
             const contenedorNota = document.getElementById('nota');
             contenedorNota.innerHTML = mensajes[tipo];
             contenedorNota.style.display = 'block';
+            
+            if (musica.paused) {
+                controlarMusica();
+            }
             
             for(let i=0; i<8; i++) {
                 crearCorazon();
