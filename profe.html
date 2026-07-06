@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Día de la Maestra, Mi Amor</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
+            background: linear-gradient(135deg, #ffdee9 0%, #b5fffc 100%);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .pizarron {
+            background-color: #1e4620;
+            border: 15px solid #8b5a2b;
+            border-radius: 10px;
+            color: #ffffff;
+            padding: 30px;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            margin-top: 20px;
+            position: relative;
+        }
+
+        h1 {
+            color: #ffeb3b;
+            font-size: 2.2rem;
+            text-shadow: 2px 2px #000;
+            margin-top: 0;
+        }
+
+        .subtitulo {
+            font-size: 1.3rem;
+            color: #ffb74d;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        p {
+            font-size: 1.15rem;
+            line-height: 1.6;
+        }
+         /* Tu sello de amor estilo tiza en el pizarrón */
+        .firma-novio {
+            font-size: 1rem;
+            color: #e0f2f1;
+            text-align: right;
+            margin-top: 15px;
+            font-style: italic;
+            opacity: 0.9;
+        }
+        .aula-virtual {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .util-escolar {
+            background: #ffffff;
+            border: 3px solid #ff4081;
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: transform 0.3s, cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+
+        .util-escolar:hover {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .nota-sorpresa {
+            background-color: #fffde7;
+            border-left: 8px solid #ff4081;
+            color: #333;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 25px;
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            font-size: 1.1rem;
+        }
+
+        .corazon {
+            position: fixed;
+            bottom: -50px;
+            color: #ff4081;
+            font-size: 1.5rem;
+            animation: flotar 4s linear infinite;
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        @keyframes flotar {
+            0% { transform: translateY(0) translateX(0); opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+     <div class="pizarron">
+        <h1>¡Feliz Día de la Maestra, mi amorcito preciosa! 🍎❤️</h1>
+        <div class="subtitulo">✨ ¡La profesora de Inicial más hermosa de todas! ✨</div>
+        
+        <p>Mi vida, me derrito de amor cada vez que me cuentas emocionada todo lo que preparas para tus pequeñitos. Aunque estemos un poquito lejos, amo escuchar tus ideas, ayudarte y saber que de alguna forma estoy ahí contigo. Sé lo agotada que terminas después de cada clase, pero ver tu pasión me enamora cada día más. ¡Eres la mejor maestra del universo entero!</p>
+
+          <!-- Aquí aparece tu firma personalizada y bonis -->
+        <div class="firma-novio">Programado con mucho amor por tu novio 😍💻❤️</div>
+        
+        <p><strong>Toca aquí abajo los juguetes de tu salón para ver los mensajitos que te dejé:</strong></p>
+
+        <div class="aula-virtual">
+            <div class="util-escolar" onclick="mostrarMensaje('crayola')">🖍️</div>
+            <div class="util-escolar" onclick="mostrarMensaje('oso')">🧸</div>
+            <div class="util-escolar" onclick="mostrarMensaje('libro')">📚</div>
+        </div>
+
+        <div id="nota" class="nota-sorpresa"></div>
+    </div>
+
+    <script>
+        const mensajes = {
+            crayola: "🎨 <strong>¡Le pones color a mi vida!</strong> Admiro demasiado la paciencia, la ternura y la hermosa sonrisa que tienes siempre para tus niños. ¡Eres pura magia enseñando!",
+            oso: "🧸 <strong>¡Mi dulce de leche!</strong> Tus pequeñitos tienen a la maestra más cariñosa y buena de todas. Tienes un corazón gigante que no te cabe en el pecho y me hace el novio más feliz.",
+            libro: "🎓 <strong>¡Ya no falta nada, mi reina!</strong> ya casi terminas y tú ya brillando en las aulas. Me hace inmensamente feliz acompañarte en este camino y ver cómo cumples tus sueños. ¡Siempre voy a estar aquí para aplaudir tus logros!"
+        };
+
+        function mostrarMensaje(tipo) {
+            const contenedorNota = document.getElementById('nota');
+            contenedorNota.innerHTML = mensajes[tipo];
+            contenedorNota.style.display = 'block';
+            
+            for(let i=0; i<8; i++) {
+                crearCorazon();
+            }
+        }
+
+        function crearCorazon() {
+            const corazon = document.createElement('div');
+            corazon.classList.add('corazon');
+            corazon.innerText = '❤️';
+            corazon.style.left = Math.random() * 100 + 'vw';
+            corazon.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            corazon.style.fontSize = (Math.random() * 1 + 1) + 'rem';
+            document.body.appendChild(corazon);
+
+            setTimeout(() => {
+                corazon.remove();
+            }, 5000);
+        }
+
+        setInterval(crearCorazon, 600);
+    </script>
+
+</body>
+</html>
